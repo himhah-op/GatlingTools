@@ -7,7 +7,7 @@ from haralyzer import HarParser, HarPage
 import config
 
 har_file = config.work_dir + '\\' + config.har_file
-har_file_filtred = config.work_dir + '\\' + config.har_file + "_filtred"
+har_file_filtred = config.work_dir + '\\' + config.har_filtred
 token = '30'
 # mercure_token / access_token / connection_id / client_id / secret
 
@@ -31,4 +31,4 @@ print (ht.get_domains (har_file))
 # ht.find_correlation (har_file_filtred, config.keys)
 
 # Etape 7 : Recherche des requetes dont les réponses contiennent les données à correlér
-ht.get_correlation(har_file_filtred, "47")
+ht.get_correlation(har_file_filtred, "ad70.A63KDR6jt9j9VHbuPp-QVjPgR_PbPgrs1DIYSLajwNI.dNqJS07p_a26HB-Ed_v5LACSMbv2anyAi1VPENThlb5clf5MR9b8uq5mQg")

@@ -3,21 +3,24 @@
 import os
 from urllib.parse import urlparse
 def get_name (next_line, index):
-    next_line = next_line.replace('(', '').replace(')', '').replace('"', '').replace('\r\n', '').replace('\n', '')
-    if next_line.find('?')>0:
-        next_line=next_line[0:next_line.find('?')]
-    parts = next_line.split('/')
+    line = next_line.replace('(', '').replace(')', '').replace('"', '').replace('\r\n', '').replace('\n', '').replace('v2/', '').replace('v1/', '')
+    if line.find('?')>0:
+        line=line[0:line.find('?')]
+    parts = line.split('/')
+    method = parts[0].strip().replace('.', '')
     if len(parts)==2:
         if parts[1].find('.')>0:
             name = parts[1]
         else:
             name = "Home"
     else:
-        if len(parts)>1:
-            name = parts[len(parts)-2] + '/' + parts[len(parts)-1]
+        if len(parts)>2:
+            name = parts[len(parts)-3] + '/' + parts[len(parts)-2] + '/' + parts[len(parts)-1]
+        elif len(parts) > 1:
+                name = parts[len(parts) - 2] + '/' + parts[len(parts) - 1]
         else:
             name = parts[len(parts)-1]
-    name = str(index).zfill(3) + ':GET ' + name.replace('#', '').replace('{', '').replace('}', '')
+    name = str(index).zfill(3) + ':' + method.upper() + ' ' + name.replace('#', '').replace('{', '').replace('}', '')
     return (name)
 
 def comment_duplicate_ressources(sim_file):
